@@ -3,12 +3,9 @@ package app.model;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Banco de preguntas de cultura general.
- * 30 preguntas por categoría (Historia, Ciencia, Cultura):
- * - 15 de nivel 1 (fáciles)
- * - 15 de nivel 2 (difíciles)
- */
+
+// Banco de preguntas de cultura general.
+// 30 preguntas por categoría (Historia, Ciencia, Cultura):
 public class QuestionBank {
     private List<Question> questions = new ArrayList<>();
     private Random rnd = new Random();
@@ -17,11 +14,10 @@ public class QuestionBank {
         loadSampleQuestions();
     }
 
+    // método que carga las preguntas
     private void loadSampleQuestions() {
 
-        /* ========================================================
-         *                      HISTORIA — NIVEL 1 (15)
-         * ======================================================== */
+        // HISTORIA — NIVEL 1 (15)
         questions.add(new Question("Historia","¿Quién fue el primer presidente de Estados Unidos?",
                 Arrays.asList("George Washington","Thomas Jefferson","Abraham Lincoln","John Adams"),0,1));
         questions.add(new Question("Historia","¿En qué año llegó Cristóbal Colón a América?",
@@ -53,9 +49,7 @@ public class QuestionBank {
         questions.add(new Question("Historia","¿En qué país surgió el Renacimiento?",
                 Arrays.asList("Italia","Francia","España","Holanda"),0,1));
 
-        /* ========================================================
-         *                      HISTORIA — NIVEL 2 (15)
-         * ======================================================== */
+        // HISTORIA — NIVEL 2 (15)
         questions.add(new Question("Historia","¿Qué doctrina definió la política exterior de EE. UU. en 1823?",
                 Arrays.asList("Doctrina Monroe","Plan Marshall","Doctrina Truman","Doctrina Brezhnev"),0,2));
         questions.add(new Question("Historia","¿Qué tratado puso fin a la Primera Guerra Mundial?",
@@ -88,9 +82,7 @@ public class QuestionBank {
                 Arrays.asList("Babilonios","Asirios","Sumerios","Persas"),0,2));
 
 
-        /* ========================================================
-         *                      HISTORIA — NIVEL 3 (15)
-         * ======================================================== */
+        // HISTORIA — NIVEL 3 (15)
         questions.add(new Question("Historia","¿Cuál fue la primera civilización en usar escritura cuneiforme?",
                 Arrays.asList("Sumerios","Babilonios","Asirios","Fenicios"),0,3));
         questions.add(new Question("Historia","¿En qué año cayó el Imperio Romano de Occidente?",
@@ -123,9 +115,7 @@ public class QuestionBank {
                 Arrays.asList("Bizantino","Romano","Macedonio","Helénico"),0,3));
 
 
-        /* ========================================================
-         *                    CIENCIA — NIVEL 1 (15)
-         * ======================================================== */
+        // CIENCIA — NIVEL 1 (15)
         questions.add(new Question("Ciencia","¿Cuál es la fórmula del agua?",
                 Arrays.asList("H₂O","CO₂","O₂","H₂SO₄"),0,1));
         questions.add(new Question("Ciencia","¿Qué partícula tiene carga negativa?",
@@ -158,9 +148,7 @@ public class QuestionBank {
                 Arrays.asList("Termómetro","Barómetro","Anemómetro","Higrómetro"),0,1));
 
 
-        /* ========================================================
-         *                    CIENCIA — NIVEL 2 (15)
-         * ======================================================== */
+        // CIENCIA — NIVEL 2 (15)
         questions.add(new Question("Ciencia","¿Velocidad de la luz?",
                 Arrays.asList("3×10⁸ m/s","3×10⁶ m/s","1×10⁵ m/s","9.8 m/s"),0,2));
         questions.add(new Question("Ciencia","¿Quién propuso la relatividad?",
@@ -193,9 +181,7 @@ public class QuestionBank {
                 Arrays.asList("Kepler","Copérnico","Ptolomeo","Brahe"),0,2));
 
 
-        /* ========================================================
-         *                    CIENCIA — NIVEL 3 (15)
-         * ======================================================== */
+        // CIENCIA — NIVEL 3 (15)
         questions.add(new Question("Ciencia","¿Qué científico desarrolló el principio de incertidumbre?",
                 Arrays.asList("Heisenberg","Bohr","Dirac","Planck"),0,3));
         questions.add(new Question("Ciencia","¿Cuál es la constante de gravitación universal?",
@@ -228,9 +214,7 @@ public class QuestionBank {
                 Arrays.asList("Espiral barrada","Elíptica","Irregular","Anular"),0,3));
 
 
-        /* ========================================================
-         *                    CULTURA — NIVEL 1 (15)
-         * ======================================================== */
+        // CULTURA — NIVEL 1 (15)
         questions.add(new Question("Cultura","¿Cuál es la capital de Colombia?",
                 Arrays.asList("Bogotá","Cali","Medellín","Barranquilla"),0,1));
         questions.add(new Question("Cultura","¿Quién escribió Cien años de soledad?",
@@ -262,10 +246,7 @@ public class QuestionBank {
         questions.add(new Question("Cultura","Bebida típica del Caribe colombiano:",
                 Arrays.asList("Agua de panela","Café","Aguardiente","Vino"),0,1));
 
-
-        /* ========================================================
-         *                    CULTURA — NIVEL 2 (15)
-         * ======================================================== */
+        // CULTURA — NIVEL 2 (15)
         questions.add(new Question("Cultura","¿En qué año fue el primer mundial de fútbol?",
                 Arrays.asList("1930","1920","1950","1948"),0,2));
         questions.add(new Question("Cultura","¿Quién pintó La noche estrellada?",
@@ -297,10 +278,7 @@ public class QuestionBank {
         questions.add(new Question("Cultura","¿Quién pintó Guernica?",
                 Arrays.asList("Picasso","Dalí","Miró","Goya"),0,2));
 
-
-        /* ========================================================
-         *                    CULTURA — NIVEL 3 (15)
-         * ======================================================== */
+        // CULTURA — NIVEL 3 (15)
         questions.add(new Question("Cultura","¿Cuál es la obra cumbre de Homero?",
                 Arrays.asList("La Ilíada","La Odisea","La Eneida","La República"),0,3));
         questions.add(new Question("Cultura","¿Qué filósofo fue maestro de Alejandro Magno?",
@@ -334,7 +312,7 @@ public class QuestionBank {
     }
 
 
-    /** Obtiene N preguntas aleatorias de una categoría y nivel. */
+    // Obtiene N preguntas aleatorias de una categoría y nivel.
     public List<Question> getRandomQuestions(String category, int level, int n) {
         List<Question> filtered = questions.stream()
                 .filter(q -> q.getCategory().equalsIgnoreCase(category) && q.getLevel() == level)
@@ -345,7 +323,7 @@ public class QuestionBank {
         return filtered.subList(0, n);
     }
 
-    /** Mezcla preguntas si faltan del nivel solicitado */
+    // Mezcla preguntas si faltan del nivel solicitado
     public List<Question> getRandomQuestionsFallback(String category, int level, int n) {
         List<Question> pick = getRandomQuestions(category, level, n);
 

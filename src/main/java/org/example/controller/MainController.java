@@ -1,3 +1,4 @@
+// importa las dependencias de Java y los demás componentes
 package app.controller;
 
 import app.model.*;
@@ -10,8 +11,10 @@ import javax.swing.Timer;
 
 import javax.swing.*;
 
+// clase controlador del juego
 public class MainController {
 
+    // declaran instancias de cada una de las GUI de la aplicación
     private StartView startView;
     private RegisterView registerView;
     private CategoriesView categoriesView;
@@ -19,6 +22,7 @@ public class MainController {
     private ResultView resultView;
     private GameWonView gameWonView;
 
+    // declaran instancias de los modelos del juego
     private QuestionBank bank;
     private ScoreManager scoreManager;
     private Player currentPlayer;
@@ -31,11 +35,10 @@ public class MainController {
     private Timer questionTimer;
     private final int timePerQuestion = 15;
 
-    /* ===============================================================
-     *                      CONSTRUCTOR
-     * =============================================================== */
+    // constructor de la clase
     public MainController() {
 
+        // inicializan las instancias
         bank = new QuestionBank();
         scoreManager = new ScoreManager();
 
@@ -60,13 +63,11 @@ public class MainController {
         startView.setVisible(true);
     }
 
-    /* ===============================================================
-     *                      LISTENERS
-     * =============================================================== */
+    // métodos escuchadores de eventos
     private void attachListeners() {
 
-        /* ------------------- START VIEW ------------------- */
 
+        // inicializa el juego
         startView.btnPlay.addActionListener(e -> {
             if (currentPlayer == null) {
                 startView.setVisible(false);
@@ -77,11 +78,11 @@ public class MainController {
             categoriesView.setVisible(true);
         });
 
+        // cierra la aplicación
         startView.btnExit.addActionListener(e -> System.exit(0));
 
 
-        /* ------------------- REGISTER VIEW ------------------- */
-
+        // registra un jugador
         registerView.btnSave.addActionListener(e -> handleUserRegistration());
 
         registerView.btnBack.addActionListener(e -> {
@@ -90,8 +91,7 @@ public class MainController {
         });
 
 
-        /* ------------------- CATEGORIES VIEW ------------------- */
-
+        // vista de categorias
         categoriesView.btnStart.addActionListener(e -> {
 
             String category = categoriesView.getSelectedCategory();
@@ -107,10 +107,10 @@ public class MainController {
         });
 
 
-        /* ------------------- GAME VIEW ------------------- */
-
+        // vista del juego
         gameView.btnNext.addActionListener(e -> processAnswerAndNext());
 
+        // botón de abandonar el juego
         gameView.btnQuit.addActionListener(e -> {
             int res = JOptionPane.showConfirmDialog(
                     gameView,
@@ -127,21 +127,23 @@ public class MainController {
         });
 
 
-        /* ------------------- RESULT VIEW ------------------- */
 
+        // vista de resultados de la partida
         resultView.btnReplay.addActionListener(e -> {
             resultView.setVisible(false);
             level = 1;
             categoriesView.setVisible(true);
         });
 
+        // botón de siguiente nivel
         resultView.btnNextLevel.addActionListener(e -> handleNextLevel());
 
+        // botón de salir del juego
         resultView.btnExit.addActionListener(e -> System.exit(0));
 
 
-        /* ------------------- GAME WON VIEW ------------------- */
 
+        // vista de juego completado
         gameWonView.btnBackToMenu.addActionListener(e -> {
             level = 1;
             gameWonView.setVisible(false);
@@ -149,9 +151,8 @@ public class MainController {
         });
     }
 
-    /* ===============================================================
-     *             REGISTRO DE JUGADOR
-     * =============================================================== */
+
+    // método de registro de jugador
     private void handleUserRegistration() {
 
         String name = registerView.txtName.getText().trim();
@@ -178,9 +179,8 @@ public class MainController {
         categoriesView.setVisible(true);
     }
 
-    /* ===============================================================
-     *                   INICIO DE RONDA
-     * =============================================================== */
+
+    // método que inicia la ronda de juego
     private void startRound(String category) {
 
         currentQuestions = bank.getRandomQuestionsFallback(category, level, 10);
@@ -194,9 +194,7 @@ public class MainController {
         loadQuestion();
     }
 
-    /* ===============================================================
-     *                   CARGAR PREGUNTA
-     * =============================================================== */
+    // método que carga la pregunta
     private void loadQuestion() {
 
         if (currentIndex >= currentQuestions.size()) {
@@ -206,18 +204,18 @@ public class MainController {
 
         Question q = currentQuestions.get(currentIndex);
 
-        // -------- 1) Mezclar opciones aleatoriamente --------
+        // mezcla las preguntas de manera aleatoria
         List<String> mixedOptions = new ArrayList<>(q.getOptions());
         Collections.shuffle(mixedOptions);
 
-        // -------- 2) Guardar índice nuevo de respuesta correcta -------
+        // Guardar índice nuevo de respuesta correcta
         int newCorrectIndex = mixedOptions.indexOf(q.getOptions().get(q.getCorrectIndex()));
 
-        // Actualizar objeto pregunta (solo para esta ronda, no permanente)
+        // Actualizar objeto pregunta
         q.setShuffledOptions(mixedOptions);
         q.setShuffledCorrectIndex(newCorrectIndex);
 
-        // -------- 3) Actualizar GUI --------
+        // Actualiza GUI
         gameView.setQuestionText(
                 String.format(
                         "(%d/%d)\n\n%s",
@@ -242,9 +240,7 @@ public class MainController {
     }
 
 
-    /* ===============================================================
-     *                        TIMER
-     * =============================================================== */
+    // método temporizador
     private void startTimer() {
 
         if (questionTimer != null && questionTimer.isRunning())
@@ -279,9 +275,7 @@ public class MainController {
         questionTimer.start();
     }
 
-    /* ===============================================================
-     *              PROCESAR RESPUESTA Y SIGUIENTE
-     * =============================================================== */
+    // método que procesa la respuesta del jugador
     private void processAnswerAndNext() {
 
         // Evita doble click
@@ -303,7 +297,7 @@ public class MainController {
             return;
         }
 
-        // ===== USAR RESPUESTAS MEZCLADAS =====
+        // usar las respuestas mezcladas
         int correctIndex = q.getShuffledCorrectIndex();    // índice dinámico
         List<String> opts = q.getShuffledOptions();        // lista mezclada
 
@@ -332,9 +326,7 @@ public class MainController {
     }
 
 
-    /* ===============================================================
-     *                     FIN DE RONDA
-     * =============================================================== */
+    // método de fin de la ronda
     private void endRound() {
 
         if (currentPlayer != null) {
@@ -363,7 +355,7 @@ public class MainController {
         if (passed) {
 
             if (level == 3) {
-                // ✔ FINAL DEL JUEGO
+                // final del juego los 3 niveles
                 resultView.setVisible(false);
                 gameWonView.setVisible(true);
                 return;
@@ -379,9 +371,7 @@ public class MainController {
         resultView.setVisible(true);
     }
 
-    /* ===============================================================
-     *               LÓGICA DE SIGUIENTE NIVEL
-     * =============================================================== */
+    // método con la lógica para el siguiente nivel
     private void handleNextLevel() {
 
         if (score < 6) {

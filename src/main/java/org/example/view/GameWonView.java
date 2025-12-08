@@ -3,10 +3,13 @@ package app.view;
 import javax.swing.*;
 import java.awt.*;
 
+// GUI de juego completado
 public class GameWonView extends JFrame {
 
+    // botón de regresar
     public JButton btnBackToMenu = new JButton("Volver al Inicio");
 
+    // constructor
     public GameWonView() {
 
         setTitle("¡Juego Completado!");
@@ -15,6 +18,7 @@ public class GameWonView extends JFrame {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // panel de fondo
         JPanel bg = new JPanel() {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -49,6 +53,7 @@ public class GameWonView extends JFrame {
         bg.add(south, BorderLayout.SOUTH);
     }
 
+    // método que estiliza los botones
     private void styleButton(JButton btn, Color neon) {
         btn.setForeground(neon);
         btn.setFont(new Font("Consolas", Font.BOLD, 20));

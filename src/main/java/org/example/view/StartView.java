@@ -5,6 +5,7 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+// GUI de vista inicial
 public class StartView extends JFrame {
 
     // Botones públicos para el controller
@@ -13,18 +14,14 @@ public class StartView extends JFrame {
 
     public StartView() {
 
-        /* ===============================
-         *   CONFIGURACIÓN DE LA VENTANA
-         * =============================== */
+        // configuración de la ventana
         setTitle("Preguntados");
         setSize(700, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(new BorderLayout());
 
-        /* ===============================
-         *  PANEL DE FONDO CYBERPUNK
-         * =============================== */
+        // panel de fondo
         JPanel bg = new JPanel() {
 
             @Override
@@ -46,9 +43,7 @@ public class StartView extends JFrame {
         bg.setLayout(new BorderLayout());
         add(bg);
 
-        /* ===============================
-         *          TÍTULO
-         * =============================== */
+        // Titulo
         JLabel title = new JLabel("P  R  E  G  U  N  T  A  D  O  S", SwingConstants.CENTER);
         title.setFont(new Font("Consolas", Font.BOLD, 36));
         title.setForeground(new Color(255, 0, 150));
@@ -56,9 +51,7 @@ public class StartView extends JFrame {
 
         bg.add(title, BorderLayout.NORTH);
 
-        /* ===============================
-         *      PANEL CENTRAL (BOTONES)
-         * =============================== */
+        // Panel central
         JPanel centerCard = new JPanel();
         centerCard.setLayout(new GridLayout(2, 1, 0, 22));  // <-- ahora son DOS BOTONES
         centerCard.setBackground(new Color(0, 0, 0, 80)); // translúcido
@@ -74,15 +67,11 @@ public class StartView extends JFrame {
         centerCard.add(btnPlay);
         centerCard.add(btnExit);
 
-        /* ===============================
-         *          FOOTER
-         * =============================== */
+        // footer
         bg.add(createFooter(), BorderLayout.SOUTH);
     }
 
-    /* =====================================================
-     *             MÉTODO QUE CREA EL FOOTER
-     * ===================================================== */
+    // método que crea el footer
     private JPanel createFooter() {
 
         JPanel footer = new JPanel();
@@ -118,17 +107,13 @@ public class StartView extends JFrame {
         return footer;
     }
 
-    /* =====================================================
-     *         ESTILO DE LABELS DEL FOOTER
-     * ===================================================== */
+    // método que estiliza el texto del footer
     private void styleFooterLabel(JLabel label, Color color, boolean bold) {
         label.setForeground(color);
         label.setFont(new Font("Consolas", bold ? Font.BOLD : Font.PLAIN, 14));
     }
 
-    /* =====================================================
-     *         ESTILO DE BOTONES CYBERPUNK NEON
-     * ===================================================== */
+    // método que estiliza los botones
     private void styleNeonButton(JButton btn, Color neonColor) {
 
         btn.setFocusPainted(false);

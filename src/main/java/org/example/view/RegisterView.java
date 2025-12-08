@@ -3,26 +3,24 @@ package app.view;
 import javax.swing.*;
 import java.awt.*;
 
+// GUI de resgistro
 public class RegisterView extends JFrame {
 
     public JTextField txtName = new JTextField(20);
+    // botones
     public JButton btnSave = new JButton("Guardar");
     public JButton btnBack = new JButton("Volver");
 
     public RegisterView() {
 
-        /* ===============================
-         * CONFIGURACIÓN DE LA VENTANA
-         * =============================== */
+        // configuración de ventana
         setTitle("Registro de Jugador");
         setSize(600, 400);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        /* ===============================
-         * PANEL DE FONDO CYBERPUNK
-         * =============================== */
+        // panel de fondo
         JPanel bg = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -41,9 +39,7 @@ public class RegisterView extends JFrame {
         bg.setLayout(new BorderLayout());
         add(bg);
 
-        /* ===============================
-         * TÍTULO
-         * =============================== */
+        // titulo
         JLabel title = new JLabel("REGISTRO DE JUGADOR", SwingConstants.CENTER);
         title.setFont(new Font("Consolas", Font.BOLD, 28));
         title.setForeground(new Color(255, 0, 150));
@@ -51,9 +47,7 @@ public class RegisterView extends JFrame {
 
         bg.add(title, BorderLayout.NORTH);
 
-        /* ===============================
-         * PANEL CENTRAL (FORMULARIO)
-         * =============================== */
+        // panel central del formulario
         JPanel formCard = new JPanel();
         formCard.setLayout(new BoxLayout(formCard, BoxLayout.Y_AXIS));
         formCard.setBackground(new Color(0, 0, 0, 60));
@@ -91,10 +85,7 @@ public class RegisterView extends JFrame {
 
         bg.add(formCard, BorderLayout.CENTER);
 
-        /* ===============================
-         * BOTONES INFERIORES
-         * =============================== */
-
+        // botones inferiores
         JPanel footer = new JPanel();
         footer.setBackground(new Color(0, 0, 0, 0));
         footer.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
@@ -109,9 +100,7 @@ public class RegisterView extends JFrame {
         bg.add(footer, BorderLayout.SOUTH);
     }
 
-    /* =====================================================
-     *  MÉTODO PARA ESTILO DE BOTONES NEON CYBERPUNK
-     * ===================================================== */
+    // método que estila los botones
     private void styleNeonButton(JButton btn, Color neonColor) {
 
         btn.setFocusPainted(false);

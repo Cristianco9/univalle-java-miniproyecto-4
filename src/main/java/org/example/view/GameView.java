@@ -5,35 +5,34 @@ import java.awt.*;
 
 public class GameView extends JFrame {
 
-    // --- HUD ---
+    // HUD
     public JLabel lblTimer = new JLabel("Tiempo: 00");
     public JLabel lblScore = new JLabel("Puntaje: 0");
     public JLabel lblLevel = new JLabel("Nivel: 1");
 
-    // --- Pregunta ---
+    // Pregunta
     public JTextArea txtQuestionArea = new JTextArea();
     public JScrollPane questionScroll;
 
-    // --- Opciones ---
+    // Opciones
     public JRadioButton[] radioOptions = new JRadioButton[4];
     public ButtonGroup group = new ButtonGroup();
 
-    // --- Inferior ---
+    // Inferior
     public JLabel lblFeedback = new JLabel(" ", SwingConstants.CENTER);
     public JButton btnNext = new JButton("Responder");
     public JButton btnQuit = new JButton("Terminar Juego");
 
+    // contructor
     public GameView() {
 
-        setTitle("Preguntados - Cyberpunk Battle Mode");
+        setTitle("Preguntados");
         setSize(700, 700);
         setResizable(false);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        /* ============================================================
-         *                 PANEL DE FONDO CYBERPUNK
-         * ============================================================ */
+        // panel de fondo
         JPanel bg = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -52,9 +51,7 @@ public class GameView extends JFrame {
         bg.setLayout(new BorderLayout());
         add(bg);
 
-        /* ============================================================
-         *                         HUD SUPERIOR
-         * ============================================================ */
+        // hub superior
         JPanel hud = new JPanel(new BorderLayout());
         hud.setBackground(new Color(0, 0, 0, 80));
         hud.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -79,9 +76,7 @@ public class GameView extends JFrame {
 
         bg.add(hud, BorderLayout.NORTH);
 
-        /* ============================================================
-         *                 TARJETA CENTRAL DE PREGUNTAS
-         * ============================================================ */
+        // Panel central de preguntas
         JPanel questionCard = new JPanel();
         questionCard.setLayout(new BorderLayout(20, 20));
         questionCard.setBackground(new Color(0, 0, 0, 100));
@@ -103,9 +98,7 @@ public class GameView extends JFrame {
 
         questionCard.add(questionScroll, BorderLayout.NORTH);
 
-        /* ============================================================
-         *                     OPCIONES DE RESPUESTA
-         * ============================================================ */
+        // opciones de preguntas
         JPanel optionsPanel = new JPanel(new GridLayout(4, 1, 15, 15));
         optionsPanel.setOpaque(false);
 
@@ -118,9 +111,7 @@ public class GameView extends JFrame {
         questionCard.add(optionsPanel, BorderLayout.CENTER);
         bg.add(questionCard, BorderLayout.CENTER);
 
-        /* ============================================================
-         *                     PANEL INFERIOR
-         * ============================================================ */
+        // panel inferior
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new BorderLayout());
         bottomPanel.setBackground(new Color(0, 0, 0, 80));
@@ -139,16 +130,16 @@ public class GameView extends JFrame {
         btnPanel.setOpaque(false);
 
         btnPanel.add(btnNext);
-        btnPanel.add(Box.createHorizontalStrut(20)); // separador estético
-        btnPanel.add(btnQuit); // agregar botón terminar
+        // separador
+        btnPanel.add(Box.createHorizontalStrut(20));
+        // agregar botón terminar
+        btnPanel.add(btnQuit);
 
         bottomPanel.add(btnPanel, BorderLayout.SOUTH);
         bg.add(bottomPanel, BorderLayout.SOUTH);
     }
 
-    /* ============================================================
-     *                 RADIOBUTTON ESTILO NEON
-     * ============================================================ */
+    // método que estiliza el texto
     private JRadioButton createNeonRadioButton(String text) {
         JRadioButton rb = new JRadioButton(text);
 
@@ -175,9 +166,7 @@ public class GameView extends JFrame {
         return rb;
     }
 
-    /* ============================================================
-     *               BOTÓN NEON CYBERPUNK
-     * ============================================================ */
+    // método que estiliza el botón
     private void styleNeonButton(JButton btn, Color neonColor) {
 
         btn.setFocusPainted(false);
@@ -201,21 +190,20 @@ public class GameView extends JFrame {
         });
     }
 
-    /* ============================================================
-     *                   MÉTODOS ÚTILES (Controller)
-     * ============================================================ */
 
-    /** Establecer el texto de la pregunta */
+    // métodos utiles del controlador
+
+    // Establecer el texto de la pregunta
     public void setQuestionText(String text) {
         txtQuestionArea.setText(text);
     }
 
-    /** Actualizar nivel */
+    // Actualizar nivel
     public void setLevelText(String text) {
         lblLevel.setText(text);
     }
 
-    /** Obtener opción seleccionada */
+    // Obtener opción seleccionada
     public int getSelectedIndex() {
         for (int i = 0; i < radioOptions.length; i++) {
             if (radioOptions[i].isSelected()) return i;
@@ -223,7 +211,7 @@ public class GameView extends JFrame {
         return -1;
     }
 
-    /** Limpiar selección */
+    // Limpiar selección
     public void clearSelection() {
         group.clearSelection();
     }

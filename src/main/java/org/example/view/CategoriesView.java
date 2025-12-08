@@ -3,15 +3,15 @@ package app.view;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Vista de selección de categoría - Estilo Cyberpunk
- */
+// Vista de selección de categoría
 public class CategoriesView extends JFrame {
 
     public JComboBox<String> cbCategories;
+    // botones
     public JButton btnStart = new JButton("Iniciar Ronda");
     public JButton btnBack = new JButton("Volver");
 
+    // constructor
     public CategoriesView(String[] categories) {
 
         setTitle("Seleccionar Categoría");
@@ -21,9 +21,7 @@ public class CategoriesView extends JFrame {
 
         setLayout(new BorderLayout());
 
-        /* =========================================================
-         *         PANEL DE FONDO CON DEGRADADO CYBERPUNK
-         * ========================================================= */
+        // Panel de fondo con color degradado
         JPanel bg = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -44,9 +42,7 @@ public class CategoriesView extends JFrame {
         add(bg);
 
 
-        /* =========================================================
-         *                       TÍTULO
-         * ========================================================= */
+        // titulo de la ventana
         JLabel title = new JLabel("SELECCIONA UNA CATEGORÍA", SwingConstants.CENTER);
         title.setFont(new Font("Consolas", Font.BOLD, 30));
         title.setForeground(new Color(255, 0, 150));
@@ -55,9 +51,7 @@ public class CategoriesView extends JFrame {
         bg.add(title, BorderLayout.NORTH);
 
 
-        /* =========================================================
-         *       PANEL CENTRAL (Combo + Botones)
-         * ========================================================= */
+        // Panel central
         JPanel card = new JPanel();
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
         card.setBackground(new Color(0, 0, 0, 80)); // translúcido
@@ -65,7 +59,7 @@ public class CategoriesView extends JFrame {
 
         bg.add(card, BorderLayout.CENTER);
 
-        /* --------- Combo estilizado --------- */
+        // Estilos de las categorias
         cbCategories = new JComboBox<>(categories);
         styleCombo(cbCategories);
         cbCategories.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -73,11 +67,11 @@ public class CategoriesView extends JFrame {
         card.add(cbCategories);
         card.add(Box.createVerticalStrut(30));
 
-        /* --------- Botón Iniciar --------- */
+        // Botón Iniciar
         styleNeonButton(btnStart, new Color(0, 255, 255)); // cyan
         btnStart.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        /* --------- Botón Volver --------- */
+        // Botón Volver
         styleNeonButton(btnBack, new Color(255, 0, 255)); // fucsia
         btnBack.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -86,24 +80,18 @@ public class CategoriesView extends JFrame {
         card.add(btnBack);
 
 
-        /* =========================================================
-         *                       FOOTER
-         * ========================================================= */
+        // footer
         bg.add(createFooter(), BorderLayout.SOUTH);
     }
 
 
-    /* =========================================================
-     *                GETTER DE CATEGORÍA
-     * ========================================================= */
+    // método getter de la categoria
     public String getSelectedCategory() {
         return (String) cbCategories.getSelectedItem();
     }
 
 
-    /* =========================================================
-     *                ESTILO DE COMBO BOX
-     * ========================================================= */
+    // estilos de la caja
     private void styleCombo(JComboBox<String> combo) {
         combo.setBackground(new Color(20, 0, 40));
         combo.setForeground(new Color(0, 255, 255));
@@ -117,9 +105,7 @@ public class CategoriesView extends JFrame {
     }
 
 
-    /* =========================================================
-     *                BOTONES CYBERPUNK NEON
-     * ========================================================= */
+    // método que estila los botones
     private void styleNeonButton(JButton btn, Color neonColor) {
 
         btn.setFocusPainted(false);
@@ -130,12 +116,11 @@ public class CategoriesView extends JFrame {
         btn.setPreferredSize(new Dimension(200, 50));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // ✨ Nuevo efecto hover: brillo sin cambiar tamaño ni borde
+        // Efecto hover sobre el botón
         btn.addMouseListener(new java.awt.event.MouseAdapter() {
 
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                // Ya no crece el borde (lo cual causaba repinte negro)
                 btn.setForeground(neonColor.brighter());
             }
 
@@ -147,9 +132,7 @@ public class CategoriesView extends JFrame {
     }
 
 
-    /* =========================================================
-     *                       FOOTER
-     * ========================================================= */
+    // footer
     private JPanel createFooter() {
 
         JPanel footer = new JPanel();
@@ -180,9 +163,7 @@ public class CategoriesView extends JFrame {
     }
 
 
-    /* =========================================================
-     *          ESTILO LABEL FOOTER
-     * ========================================================= */
+    // estilos de las etiquetas del footer
     private void styleFooterLabel(JLabel lbl, Color color, boolean bold) {
         lbl.setForeground(color);
         lbl.setFont(new Font("Consolas", bold ? Font.BOLD : Font.PLAIN, 14));

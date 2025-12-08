@@ -3,6 +3,7 @@ package app.view;
 import javax.swing.*;
 import java.awt.*;
 
+// GUI de resultados
 public class ResultView extends JFrame {
 
     public JLabel lblResult = new JLabel("Resultado", SwingConstants.CENTER);
@@ -18,9 +19,7 @@ public class ResultView extends JFrame {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        /* ============================================================
-         *                     PANEL DE FONDO CYBERPUNK
-         * ============================================================ */
+        // Panel de fondo
         JPanel bg = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -42,14 +41,12 @@ public class ResultView extends JFrame {
         bg.setLayout(new BorderLayout());
         add(bg);
 
-        /* ============================================================
-         *                     TARJETA CENTRAL
-         * ============================================================ */
+        // Panel central
         JPanel card = new JPanel(new BorderLayout());
         card.setOpaque(false);
         card.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
-        // Panel semi-transparente "cristal"
+        // Panel semi-transparente
         JPanel glass = new JPanel(new BorderLayout());
         glass.setBackground(new Color(0, 0, 0, 120));
         glass.setBorder(BorderFactory.createCompoundBorder(
@@ -57,16 +54,14 @@ public class ResultView extends JFrame {
                 BorderFactory.createEmptyBorder(20, 20, 20, 20)
         ));
 
-        /* ================= TEXTO RESULTADOS ================ */
+        // texto de resultados
         lblResult.setFont(new Font("Consolas", Font.BOLD, 22));
         lblResult.setForeground(new Color(0, 255, 255));
         lblResult.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
 
         glass.add(lblResult, BorderLayout.NORTH);
 
-        /* ============================================================
-         *                     SECCIÓN BOTONES
-         * ============================================================ */
+        // panel de botones
         JPanel buttonsPanel = new JPanel(new GridLayout(3, 1, 15, 15));
         buttonsPanel.setOpaque(false);
 
@@ -84,9 +79,7 @@ public class ResultView extends JFrame {
         bg.add(card, BorderLayout.CENTER);
     }
 
-    /* ============================================================
-     *                     BOTÓN NEON MEJORADO
-     * ============================================================ */
+    // método que estiliza los botones
     private void styleButton(JButton btn, Color neonColor) {
 
         btn.setFocusPainted(false);

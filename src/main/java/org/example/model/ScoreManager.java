@@ -4,14 +4,17 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-/**
- * Maneja persistencia simple en archivos: usuarios y puntajes.
- */
+// Maneja persistencia simple en archivos: usuarios y puntajes.
 public class ScoreManager {
+
+    // directorio donde se van a almacenar los datos
     private static final String DATA_DIR = "data";
+    // fichero con los datos de los usuarios
     private static final String USERS_FILE = DATA_DIR + "/users.txt";
+    // fichero con los resultados de los usuarios
     private static final String SCORES_FILE = DATA_DIR + "/scores.txt";
 
+    // contructor
     public ScoreManager() {
         try {
             Files.createDirectories(Paths.get(DATA_DIR));
@@ -21,7 +24,7 @@ public class ScoreManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // ensure scores file exists
+        // verifica que el usuario exista
         try {
             Files.createFile(Paths.get(SCORES_FILE));
         } catch (FileAlreadyExistsException ex) {
@@ -31,6 +34,7 @@ public class ScoreManager {
         }
     }
 
+    // método que valida al usuario
     public boolean userExists(String name) {
         try (BufferedReader br = new BufferedReader(new FileReader(USERS_FILE))) {
             String line;
@@ -41,6 +45,7 @@ public class ScoreManager {
         return false;
     }
 
+    // método de registro de usuario
     public boolean registerUser(String name) {
         if (userExists(name)) return false;
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(USERS_FILE, true))) {
@@ -53,6 +58,7 @@ public class ScoreManager {
         }
     }
 
+    // método que almacena el puntaje de la partida
     public void saveScore(String name, int score, String category, int level) {
         String record = String.format("%s;%d;%s;level%d;%s", name, score, category, level, new Date().toString());
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(SCORES_FILE, true))) {
@@ -63,6 +69,7 @@ public class ScoreManager {
         }
     }
 
+    // método que trae el puntaje más alto
     public OptionalInt getBestScore(String name) {
         int best = -1;
         try (BufferedReader br = new BufferedReader(new FileReader(SCORES_FILE))) {
