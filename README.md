@@ -169,7 +169,7 @@ git clone https://github.com/Cristianco9/univalle-java-miniproyecto-4.git
 
 Se encuentra en el documento PDF
 ```sh
-documentos/informe.pdf
+documents/informe-mini-proyecto-4.pdf
 ```
 
 ---
